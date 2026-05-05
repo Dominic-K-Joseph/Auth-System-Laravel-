@@ -8,10 +8,10 @@
 
 <body class="bg-gray-100">
 
-     {{-- Navbar  --}}
+    {{-- Navbar  --}}
     <div class="w-full bg-white shadow px-6 py-3 flex justify-between items-center">
 
-         {{-- Logo (Left) --}}
+        {{-- Logo (Left) --}}
         <div class="flex items-center gap-2">
             <div class="bg-blue-500 text-white px-3 py-1 rounded-lg font-bold">
                 A
@@ -43,11 +43,27 @@
 
     </div>
 
+    @if (session('success'))
+        <div id="toast-success"
+            class="fixed top-16 right-5 bg-green-500 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500">
+            {{ session('success') }}
+        </div>
+    @endif
+
     {{-- Center Content --}}
     <div class="min-h-[90vh] flex items-center justify-center">
         @yield('content')
     </div>
 
-</body>
+    <script id="toast_script">
+        setTimeout(() => {
+            const toast = document.getElementById('toast-success');
+            if (toast) {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 500);
+            }
+        }, 3000);
+    </script>
 
+</body>
 </html>

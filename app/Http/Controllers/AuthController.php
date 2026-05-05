@@ -91,4 +91,36 @@ class AuthController extends Controller
 
         return redirect('/login');
     }
+
+    public function showReset()
+    {
+        return view('reset');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => [
+                'required',
+                'confirmed',
+                Password::min(8)
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols()
+            ]
+        ], [
+            'email.exists' => 'Email not registered'
+        ]);
+
+        $updated = User::where('email', $request->email)->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        if ($updated) {
+            return redirect('/login')->with('success', 'Password updated successfully');
+        }
+
+        return back()->with('error', 'Failed to update password');
+    }
 }

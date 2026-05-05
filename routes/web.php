@@ -23,7 +23,11 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+
+    Route::get('/reset-password', [AuthController::class, 'showReset']);
+    Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 });
 
 Route::get('/welcome', [AuthController::class, 'welcome'])->middleware('auth');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+

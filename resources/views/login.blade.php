@@ -18,7 +18,7 @@
                     @enderror
                 </div>
 
-                 {{-- Password --}}
+                {{-- Password --}}
                 <div class="mb-3">
                     <input name="password" type="password" placeholder="Password"
                         class="w-full p-2 border rounded @error('password') border-red-500 @enderror">
@@ -38,7 +38,12 @@
                 <button class="w-full bg-green-500 text-white p-2 rounded">
                     Login
                 </button>
-
+                
+                <div class="text-center mt-3">
+                    <a href="/reset-password" class="text-sm text-blue-500 hover:underline">
+                        Reset Password
+                    </a>
+                </div>
             </form>
 
         </x-auth-card>
