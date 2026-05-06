@@ -6,6 +6,7 @@
             {{ session('error') }}
         </div>
     @endif
+
     <div class="w-full max-w-md">
 
         <x-auth-card title="Reset Password">
@@ -13,17 +14,10 @@
             <form method="POST" action="/reset-password">
                 @csrf
 
-                {{-- Email --}}
-                <div class="mb-3">
-                    <input name="email" type="email" placeholder="Enter your email" value="{{ old('email') }}"
-                        class="w-full p-2 border rounded @error('email') border-red-500 @enderror">
+                {{-- Hidden Token --}}
+                <input type="hidden" name="token" value="{{ request('token') }}">
 
-                    @error('email')
-                        <p class="text-red-500 text-sm">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                {{-- New Password --}}
+                {{-- New Password  --}}
                 <div class="mb-3">
                     <input name="password" type="password" placeholder="New Password"
                         class="w-full p-2 border rounded @error('password') border-red-500 @enderror">
@@ -33,7 +27,7 @@
                     @enderror
                 </div>
 
-                {{-- Confirm Password --}}
+                {{-- Confirm Password  --}}
                 <div class="mb-3">
                     <input name="password_confirmation" type="password" placeholder="Confirm Password"
                         class="w-full p-2 border rounded">
@@ -48,6 +42,7 @@
                         ← Back to Login
                     </a>
                 </div>
+
             </form>
 
         </x-auth-card>
